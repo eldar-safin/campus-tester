@@ -3,7 +3,7 @@ import { defineConfig } from '@playwright/test';
 const targetUrl = process.env.TARGET_URL;
 
 if (!targetUrl) {
-  throw new Error('Переменная TARGET_URL обязательна. Укажите её в файле .env проекта.');
+  throw new Error('Переменная TARGET_URL обязательна. Укажите её в .env или при запуске задания.');
 }
 
 let parsedTargetUrl: URL;
@@ -22,7 +22,7 @@ export default defineConfig({
   testDir: './tests',
   timeout: 30_000,
   workers: 1,
-  reporter: 'list',
+  reporter: './console-reporter.ts',
   projects: [
     {
       name: 'chromium',

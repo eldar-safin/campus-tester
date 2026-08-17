@@ -1,6 +1,8 @@
 import { expect, test } from '@playwright/test';
 
-test('проверяемый сайт доступен', async ({ baseURL, page }) => {
+const targetUrl = process.env.TARGET_URL;
+
+test(`сайт ${targetUrl} доступен`, async ({ baseURL, page }) => {
   if (!baseURL) {
     throw new Error('Адрес проверяемого сайта (baseURL) не настроен.');
   }
