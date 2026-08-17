@@ -2,3 +2,8 @@
 .env
 .env.*
 !.env.example
+
+# Playwright local dependencies and generated artifacts.
+playwright/node_modules/
+playwright/test-results/
+playwright/playwright-report/

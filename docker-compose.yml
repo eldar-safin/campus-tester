@@ -16,5 +16,20 @@ services:
       retries: 12
       start_period: 60s
 
+  playwright:
+    image: mcr.microsoft.com/playwright:v1.62.1-noble
+    profiles:
+      - tests
+    init: true
+    ipc: host
+    working_dir: /work
+    environment:
+      TARGET_URL: ${TARGET_URL:?Переменная TARGET_URL не задана. Укажите её в файле .env}
+    volumes:
+      - ./playwright:/work
+      - playwright_node_modules:/work/node_modules
+    command: ["sh", "-c", "npm ci && npm test"]
+
 volumes:
   jenkins_home:
+  playwright_node_modules:
