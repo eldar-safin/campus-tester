@@ -9,7 +9,7 @@ pipeline {
         stage('Подготовка') {
             steps {
                 script {
-                    def targetUrl = env.TARGET_URL?.trim()
+                    def targetUrl = env.DEFAULT_TARGET_URL?.trim()
 
                     if (!targetUrl) {
                         targetUrl = input(
