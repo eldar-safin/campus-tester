@@ -1,6 +1,8 @@
 services:
   jenkins:
-    image: jenkins/jenkins:lts-jdk21
+    build:
+      context: ./jenkins
+    image: campus-tester-jenkins:lts
     container_name: campus-tester-jenkins
     restart: unless-stopped
     ports:

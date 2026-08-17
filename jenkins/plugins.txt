@@ -1,0 +1,11 @@
+# Directly selected plugins.
+workflow-aggregator:608.v67378e9d3db_1
+pipeline-graph-view:998.vc30deece0e36
+git:5.10.1
+credentials-binding:728.v902a_273b_8947
+
+# Transitive dependencies pinned above versions with published security warnings.
+git-client:6.6.1
+pipeline-groovy-lib:798.v5cc688825312
+jakarta-mail-api:2.1.5-1
+script-security:1412.v7737b_3405f86
