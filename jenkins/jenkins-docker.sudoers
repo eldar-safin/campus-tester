@@ -1,1 +1,1 @@
-jenkins ALL=(root) NOPASSWD: /usr/bin/docker
+jenkins ALL=(root) NOPASSWD: SETENV: /usr/bin/docker
