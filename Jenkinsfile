@@ -36,13 +36,14 @@ pipeline {
 
         stage('Проверка доступности') {
             steps {
-                withEnv(["TARGET_URL=${env.RESOLVED_TARGET_URL}"]) {
-                    script {
-                        docker.image('mcr.microsoft.com/playwright:v1.62.1-noble').inside(
-                            '--ipc=host --user 1000:1000'
-                        ) {
-                            dir('playwright') {
-                                sh 'npm ci --no-audit --no-fund > /dev/null'
+                script {
+                    docker.image('mcr.microsoft.com/playwright:v1.62.1-noble').inside(
+                        '--ipc=host --user 1000:1000'
+                    ) {
+                        dir('playwright') {
+                            sh 'npm ci --no-audit --no-fund > /dev/null'
+
+                            withEnv(["TARGET_URL=${env.RESOLVED_TARGET_URL}"]) {
                                 sh 'npm test'
                             }
                         }
