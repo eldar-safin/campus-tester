@@ -1,0 +1,51 @@
+jenkins:
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: "${JENKINS_ADMIN_USERNAME}"
+          password: "${JENKINS_ADMIN_PASSWORD}"
+
+  authorizationStrategy:
+    globalMatrix:
+      entries:
+        - user:
+            name: "${JENKINS_ADMIN_USERNAME}"
+            permissions:
+              - "Overall/Administer"
+        - user:
+            name: "anonymous"
+            permissions:
+              - "Overall/Read"
+              - "Job/Read"
+              - "Job/Build"
+
+tool:
+  git:
+    installations:
+      - name: "git"
+        home: "/usr/bin/git"
+
+jobs:
+  - script: |
+      pipelineJob('campus-tester') {
+        description('Автоматизированное тестирование сайта с помощью Playwright')
+
+        definition {
+          cpsScm {
+            scm {
+              git {
+                remote {
+                  url('${JENKINSFILE_REPOSITORY}')
+                }
+                branch('refs/heads/${JENKINSFILE_BRANCH}')
+                configure { gitScm ->
+                  gitScm.gitTool[0].value = 'git'
+                }
+              }
+            }
+            scriptPath('${JENKINSFILE_PATH}')
+            lightweight(true)
+          }
+        }
+      }
